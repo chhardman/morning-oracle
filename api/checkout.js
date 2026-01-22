@@ -1,11 +1,18 @@
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
+
+    // Check if Stripe key is configured
+    if (!process.env.STRIPE_SECRET_KEY) {
+        console.error('STRIPE_SECRET_KEY is not set');
+        return res.status(500).json({ error: 'Stripe not configured' });
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const origin = req.headers.origin || 'https://morningroutines.co';
 
     try {
         const session = await stripe.checkout.sessions.create({
@@ -17,7 +24,6 @@ export default async function handler(req, res) {
                         product_data: {
                             name: 'Mornings Shouldn\'t Suck',
                             description: 'The complete guide to building a powerful morning routine. 20+ science-backed habits.',
-                            images: ['https://morningroutines.co/book-cover.png'],
                         },
                         unit_amount: 1200, // $12.00 in cents
                     },
@@ -25,18 +31,14 @@ export default async function handler(req, res) {
                 },
             ],
             mode: 'payment',
-            success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin}/#book`,
-            // Collect email for your records
+            success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/#book`,
             customer_creation: 'always',
-            consent_collection: {
-                terms_of_service: 'none',
-            },
         });
 
         res.status(200).json({ url: session.url });
     } catch (error) {
-        console.error('Stripe error:', error);
-        res.status(500).json({ error: 'Failed to create checkout session' });
+        console.error('Stripe error:', error.message);
+        res.status(500).json({ error: error.message || 'Failed to create checkout session' });
     }
 }
