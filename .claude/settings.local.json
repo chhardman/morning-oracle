@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo create:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git push:*)",
+      "Bash(git commit --amend --author=\"Chris Hardman <cgrfan5@gmail.com>\" -m \"$\\(cat <<''EOF''\nMorning Oracle Site\n\nCo-Authored-By: Chris Hardman <chris@hardmanperformance.com>\nEOF\n\\)\")",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd first name field to email capture form\n\nNow collects both first name and email, sending both to Omnisend.\n\nCo-Authored-By: Chris Hardman <chris@hardmanperformance.com>\nEOF\n\\)\" --author=\"Chris Hardman <cgrfan5@gmail.com>\")",
+      "Bash(git commit:*)"
+    ]
+  }
+}

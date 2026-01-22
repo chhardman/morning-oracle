@@ -19,15 +19,15 @@ export default async function handler(req, res) {
 
         // Verify payment was successful
         if (session.payment_status === 'paid') {
-            // Generate a time-limited download token
-            // This is a simple approach - the token is the session ID itself
-            // which Stripe will validate. For extra security, you could
-            // create a signed JWT with an expiration time.
+            // Set a secure cookie that lasts 30 days
+            // The cookie stores the session ID so we can verify it later
+            res.setHeader('Set-Cookie', [
+                `purchase_session=${sessionId}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${30 * 24 * 60 * 60}`
+            ]);
 
             return res.status(200).json({
                 success: true,
                 customerEmail: session.customer_details?.email || '',
-                downloadToken: sessionId,
             });
         } else {
             return res.status(400).json({

@@ -198,7 +198,7 @@
                 </p>
                 <a href="#" class="btn" id="download-btn">Download PDF →</a>
                 <p class="note">
-                    Bookmark this page — you can return to download again anytime.
+                    You can return to download again anytime (same browser, 30 days).
                 </p>
             </div>
 
@@ -248,7 +248,8 @@
 
                 if (data.success) {
                     successEl.classList.remove('hidden');
-                    downloadBtn.href = `/api/download?token=${sessionId}`;
+                    // Cookie is now set, so download link just goes to /api/download
+                    downloadBtn.href = '/api/download';
                 } else {
                     errorEl.classList.remove('hidden');
                     document.getElementById('error-message').textContent = data.error || 'Payment verification failed. Please contact chris@morningroutines.co';

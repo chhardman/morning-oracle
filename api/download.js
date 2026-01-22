@@ -1,49 +1,60 @@
 import Stripe from 'stripe';
-import { readFileSync } from 'fs';
-import { join } from 'path';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
-    const { token } = req.query;
+// Parse cookies from request header
+function parseCookies(cookieHeader) {
+    const cookies = {};
+    if (!cookieHeader) return cookies;
 
-    if (!token) {
-        return res.status(400).json({ error: 'Download token required' });
+    cookieHeader.split(';').forEach(cookie => {
+        const [name, ...rest] = cookie.split('=');
+        cookies[name.trim()] = rest.join('=').trim();
+    });
+    return cookies;
+}
+
+export default async function handler(req, res) {
+    // Get session ID from cookie
+    const cookies = parseCookies(req.headers.cookie);
+    const sessionId = cookies.purchase_session;
+
+    if (!sessionId) {
+        return res.status(403).send(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>Access Denied</title></head>
+            <body style="font-family: system-ui; padding: 50px; text-align: center;">
+                <h1>Access Denied</h1>
+                <p>You need to purchase the book to download it.</p>
+                <p><a href="/#book">Purchase Mornings Shouldn't Suck →</a></p>
+            </body>
+            </html>
+        `);
     }
 
     try {
-        // Verify the token is a valid paid session
-        const session = await stripe.checkout.sessions.retrieve(token);
+        // Verify the session is still valid and was paid
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
 
         if (session.payment_status !== 'paid') {
-            return res.status(403).json({ error: 'Invalid or unpaid session' });
+            return res.status(403).send(`
+                <!DOCTYPE html>
+                <html>
+                <head><title>Access Denied</title></head>
+                <body style="font-family: system-ui; padding: 50px; text-align: center;">
+                    <h1>Access Denied</h1>
+                    <p>Your payment could not be verified.</p>
+                    <p>Contact chris@morningroutines.co for help.</p>
+                </body>
+                </html>
+            `);
         }
 
-        // Optional: Check if download was already used (would need a database)
-        // For now, we allow re-downloads which is customer-friendly
-
-        // Serve the PDF
-        // In production, you'd want to store this in a private S3 bucket
-        // or similar. For now, we'll reference a local file.
-
-        // Set headers for PDF download
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename="Mornings-Shouldnt-Suck.pdf"');
-
-        // In Vercel, you'd typically fetch from a private URL like:
-        // const pdfUrl = process.env.BOOK_PDF_URL;
-        // const response = await fetch(pdfUrl);
-        // const buffer = await response.arrayBuffer();
-        // res.send(Buffer.from(buffer));
-
-        // For now, redirect to a signed URL or serve directly
-        // You'll need to set BOOK_PDF_URL in your environment variables
-        // pointing to a private storage location (S3, Cloudflare R2, etc.)
-
+        // Payment verified - redirect to the PDF
         const pdfUrl = process.env.BOOK_PDF_URL;
 
         if (pdfUrl) {
-            // Redirect to the PDF (if using signed URLs or public storage)
             res.redirect(302, pdfUrl);
         } else {
             res.status(500).json({
@@ -52,6 +63,15 @@ export default async function handler(req, res) {
         }
     } catch (error) {
         console.error('Download error:', error);
-        res.status(500).json({ error: 'Download failed' });
+        res.status(500).send(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>Error</title></head>
+            <body style="font-family: system-ui; padding: 50px; text-align: center;">
+                <h1>Something went wrong</h1>
+                <p>Please try again or contact chris@morningroutines.co for help.</p>
+            </body>
+            </html>
+        `);
     }
 }
