@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Morning Power Score Quiz | How Elite Is Your Morning Routine?</title>
+    <meta name="title" content="Morning Power Score Quiz | How Elite Is Your Morning Routine?">
+    <meta name="description" content="Take the free Morning Oracle quiz to discover your Morning Power Score. Get personalized recommendations to transform your mornings from chaos to conquering. 8 questions, instant results.">
+    <meta name="keywords" content="morning routine, morning habits, morning quiz, productivity, wake up routine, healthy morning, morning ritual, morning power">
+    <meta name="author" content="Chris Hardman">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://morningroutines.co">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://morningroutines.co">
+    <meta property="og:title" content="What's Your Morning Power Score?">
+    <meta property="og:description" content="The Morning Oracle will judge your morning routine. Take the quiz and discover if you're a Morning Deity or a Chaos Agent.">
+    <meta property="og:image" content="https://morningroutines.co/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Morning Routines">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://morningroutines.co">
+    <meta name="twitter:title" content="What's Your Morning Power Score?">
+    <meta name="twitter:description" content="The Morning Oracle will judge your morning routine. Take the quiz and discover if you're a Morning Deity or a Chaos Agent.">
+    <meta name="twitter:image" content="https://morningroutines.co/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#C7522A">
+    <meta name="msapplication-TileColor" content="#C7522A">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Morning Power Score Quiz",
+        "description": "An interactive quiz to evaluate and improve your morning routine",
+        "url": "https://morningroutines.co",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Chris Hardman",
+            "email": "chris@morningroutines.co"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Sova",
+            "url": "https://drinksova.com"
+        }
+    }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=Gamja+Flower&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #FDF6E3;
+            --warm-white: #FFFEF9;
+            --sepia: #D4A574;
+            --burnt-orange: #C7522A;
+            --terracotta: #E07B53;
+            --sage: #8B9A6D;
+            --deep-brown: #3D2914;
+            --soft-brown: #6B4423;
+            --golden: #DAA520;
+            --peach: #FFDAB9;
+        }
+
+        body {
+            font-family: 'Instrument Serif', Georgia, serif;
+            background: var(--cream);
+            color: var(--deep-brown);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Grainy texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Pixel Sun Animation */
+        .sun-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .pixel-sun {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .sun-core {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--golden);
+            border-radius: 4px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow:
+                0 0 20px var(--golden),
+                0 0 40px rgba(218, 165, 32, 0.5);
+        }
+
+        .sun-ray {
+            position: absolute;
+            background: var(--golden);
+            opacity: 0.8;
+        }
+
+        .ray-1 { width: 8px; height: 20px; top: 0; left: 50%; transform: translateX(-50%); }
+        .ray-2 { width: 8px; height: 20px; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .ray-3 { width: 20px; height: 8px; left: 0; top: 50%; transform: translateY(-50%); }
+        .ray-4 { width: 20px; height: 8px; right: 0; top: 50%; transform: translateY(-50%); }
+        .ray-5 { width: 8px; height: 14px; top: 8px; left: 12px; transform: rotate(45deg); }
+        .ray-6 { width: 8px; height: 14px; top: 8px; right: 12px; transform: rotate(-45deg); }
+        .ray-7 { width: 8px; height: 14px; bottom: 8px; left: 12px; transform: rotate(-45deg); }
+        .ray-8 { width: 8px; height: 14px; bottom: 8px; right: 12px; transform: rotate(45deg); }
+
+        .sun-progress {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            text-align: center;
+            margin-top: 8px;
+            color: var(--soft-brown);
+            letter-spacing: 1px;
+        }
+
+        /* Screen states */
+        .screen {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Start Screen */
+        .oracle-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .oracle-symbol {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .oracle-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            color: var(--deep-brown);
+        }
+
+        .oracle-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--soft-brown);
+            margin-bottom: 30px;
+        }
+
+        /* Hand-drawn border box */
+        .oracle-card {
+            background: var(--warm-white);
+            padding: 40px 30px;
+            margin: 20px 0;
+            position: relative;
+            border: 3px solid var(--deep-brown);
+            /* Slightly wonky border effect */
+            border-radius: 2px 8px 4px 6px;
+            box-shadow:
+                6px 6px 0 var(--sepia),
+                12px 12px 0 rgba(212, 165, 116, 0.3);
+        }
+
+        .oracle-card::before {
+            content: '✦';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cream);
+            padding: 0 15px;
+            font-size: 1.2rem;
+            color: var(--burnt-orange);
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro-text em {
+            font-style: italic;
+            color: var(--burnt-orange);
+        }
+
+        /* Decorative elements */
+        .decorative-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: var(--sepia);
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            height: 1px;
+            width: 60px;
+            background: linear-gradient(90deg, transparent, var(--sepia), transparent);
+        }
+
+        /* Buttons */
+        .btn-oracle {
+            display: block;
+            width: 100%;
+            background: var(--deep-brown);
+            color: var(--cream);
+            padding: 18px 30px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .btn-oracle::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border: 2px dashed var(--sepia);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-oracle:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0 var(--burnt-orange);
+        }
+
+        .btn-oracle:hover::before {
+            opacity: 1;
+        }
+
+        /* Question Screen */
+        .question-indicator {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-align: center;
+            color: var(--soft-brown);
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 35px;
+            padding: 0 10px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: transparent;
+            border: 2px solid var(--sepia);
+            padding: 16px 20px;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.05rem;
+            color: var(--deep-brown);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .option-btn::before {
+            content: attr(data-symbol);
+            font-size: 1.3rem;
+            width: 30px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .option-btn:hover {
+            background: var(--peach);
+            border-color: var(--burnt-orange);
+            transform: translateX(5px);
+        }
+
+        .option-btn.selected {
+            background: var(--burnt-orange);
+            color: var(--cream);
+            border-color: var(--burnt-orange);
+        }
+
+        /* Results Screen */
+        .results-header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .reading-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--soft-brown);
+            margin-bottom: 20px;
+        }
+
+        .power-score {
+            font-size: 6rem;
+            font-weight: 400;
+            color: var(--burnt-orange);
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 4px 4px 0 var(--sepia);
+        }
+
+        .power-label {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--soft-brown);
+        }
+
+        .rank-badge {
+            display: inline-block;
+            background: var(--deep-brown);
+            color: var(--golden);
+            padding: 12px 30px;
+            margin: 30px 0;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .rank-badge::before,
+        .rank-badge::after {
+            content: '★';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .rank-badge::before { left: 10px; }
+        .rank-badge::after { right: 10px; }
+
+        .oracle-reading {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            border-left: 3px solid var(--sepia);
+            border-right: 3px solid var(--sepia);
+            margin: 20px 0;
+        }
+
+        /* Prescription section */
+        .prescription-section {
+            background: var(--peach);
+            padding: 30px;
+            margin: 30px -30px;
+            border-top: 2px dashed var(--sepia);
+            border-bottom: 2px dashed var(--sepia);
+        }
+
+        .prescription-header {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--soft-brown);
+        }
+
+        .rx-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(61, 41, 20, 0.2);
+        }
+
+        .rx-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .rx-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--burnt-orange);
+            padding-top: 3px;
+        }
+
+        .rx-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .rx-content p {
+            font-size: 0.95rem;
+            color: var(--soft-brown);
+            line-height: 1.6;
+        }
+
+        /* Email section */
+        .email-offering {
+            background: var(--deep-brown);
+            color: var(--cream);
+            padding: 30px;
+            margin: 30px -30px;
+            text-align: center;
+        }
+
+        .email-offering h3 {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 10px;
+            color: var(--golden);
+        }
+
+        .email-offering p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 14px 16px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            border: 2px solid var(--sepia);
+            background: var(--cream);
+            color: var(--deep-brown);
+        }
+
+        .email-input::placeholder {
+            color: var(--sepia);
+        }
+
+        .email-submit {
+            padding: 14px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            background: var(--golden);
+            color: var(--deep-brown);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .email-submit:hover {
+            background: var(--cream);
+        }
+
+        .email-success {
+            display: none;
+            color: var(--golden);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .email-consent {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            margin-top: 15px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Book CTA */
+        .book-section {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 20px;
+        }
+
+        .book-section p {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .btn-book {
+            display: inline-block;
+            background: var(--burnt-orange);
+            color: var(--cream);
+            padding: 16px 40px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 2px solid var(--burnt-orange);
+        }
+
+        .btn-book:hover {
+            background: transparent;
+            color: var(--burnt-orange);
+        }
+
+        /* Sova Section */
+        .sova-section {
+            background: linear-gradient(135deg, #1A1A2E 0%, #2D2D4A 100%);
+            padding: 35px 30px;
+            margin: 30px -30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sova-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .sova-moon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .sova-section h3 {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--peach);
+            margin-bottom: 12px;
+        }
+
+        .sova-section p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+            max-width: 400px;
+            margin: 0 auto 20px;
+        }
+
+        .sova-link {
+            display: inline-block;
+            color: var(--golden);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 28px;
+            border: 1px solid var(--golden);
+            transition: all 0.2s ease;
+        }
+
+        .sova-link:hover {
+            background: var(--golden);
+            color: #1A1A2E;
+        }
+
+        /* Share section */
+        .share-section {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px dashed var(--sepia);
+            margin-top: 20px;
+        }
+
+        .share-section p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--soft-brown);
+            margin-bottom: 15px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .share-btn {
+            padding: 10px 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-decoration: none;
+            border: 1px solid var(--sepia);
+            color: var(--soft-brown);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .share-btn:hover {
+            background: var(--sepia);
+            color: var(--cream);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--soft-brown);
+            letter-spacing: 1px;
+        }
+
+        .footer a {
+            color: var(--burnt-orange);
+            text-decoration: none;
+        }
+
+        /* Doodles and decorations */
+        .corner-doodle {
+            position: fixed;
+            opacity: 0.15;
+            font-size: 3rem;
+            color: var(--sepia);
+            pointer-events: none;
+        }
+
+        .corner-doodle.top-left { top: 20px; left: 20px; }
+        .corner-doodle.bottom-right { bottom: 20px; right: 100px; }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .sun-container {
+                top: 10px;
+                right: 10px;
+            }
+
+            .pixel-sun {
+                width: 60px;
+                height: 60px;
+            }
+
+            .sun-core {
+                width: 30px;
+                height: 30px;
+            }
+
+            .oracle-card {
+                padding: 30px 20px;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .prescription-section,
+            .email-offering {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .corner-doodle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="corner-doodle top-left">☽</div>
+    <div class="corner-doodle bottom-right">✧</div>
+
+    <div class="sun-container">
+        <div class="pixel-sun" id="pixel-sun">
+            <div class="sun-ray ray-1"></div>
+            <div class="sun-ray ray-2"></div>
+            <div class="sun-ray ray-3"></div>
+            <div class="sun-ray ray-4"></div>
+            <div class="sun-ray ray-5"></div>
+            <div class="sun-ray ray-6"></div>
+            <div class="sun-ray ray-7"></div>
+            <div class="sun-ray ray-8"></div>
+            <div class="sun-core"></div>
+        </div>
+        <div class="sun-progress" id="sun-progress">DAWN</div>
+    </div>
+
+    <div class="container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <header class="oracle-header">
+                <span class="oracle-symbol">🌄</span>
+                <h1 class="oracle-title">The Morning Oracle</h1>
+                <p class="oracle-subtitle">Est. Since You Woke Up</p>
+            </header>
+
+            <div class="oracle-card">
+                <p class="intro-text">
+                    Ah, another soul seeking <em>morning wisdom</em>.<br><br>
+                    The Oracle has watched countless sunrises and even more people fumble through them.
+                    Answer truthfully, and I shall reveal whether your mornings are <em>legendary</em>...
+                    or a beautiful disaster.
+                </p>
+
+                <div class="decorative-line">✦</div>
+
+                <p class="intro-text" style="font-size: 1rem; margin-bottom: 25px;">
+                    8 questions. No judgment.<br>
+                    <em>(Okay, maybe a little judgment.)</em>
+                </p>
+
+                <button class="btn-oracle" onclick="startReading()">
+                    Consult the Oracle →
+                </button>
+            </div>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question-screen" class="screen">
+            <div class="oracle-card">
+                <p class="question-indicator" id="q-indicator">QUESTION I OF VIII</p>
+                <h2 class="question-text" id="question-text"></h2>
+                <div class="options-container" id="options-container"></div>
+            </div>
+        </div>
+
+        <!-- Email Gate Screen -->
+        <div id="email-gate-screen" class="screen">
+            <div class="oracle-card" style="text-align: center;">
+                <span class="oracle-symbol" style="font-size: 3rem; animation: none;">✨</span>
+                <h2 style="font-size: 1.6rem; font-style: italic; margin: 20px 0 15px;">The Oracle has calculated your fate.</h2>
+                <p class="intro-text" style="margin-bottom: 25px;">
+                    Your Morning Power Score awaits.<br>
+                    <em>Where shall I send your reading?</em>
+                </p>
+
+                <form id="gate-email-form" style="max-width: 320px; margin: 0 auto;">
+                    <input type="email" class="email-input" placeholder="your@email.com" required id="gate-email-input" style="width: 100%; margin-bottom: 12px; text-align: center;">
+                    <button type="submit" class="btn-oracle" style="margin-bottom: 15px;">
+                        Reveal My Score →
+                    </button>
+                </form>
+                <p class="email-consent" style="opacity: 0.6;">You'll also receive occasional wisdom from Sova. Unsubscribe anytime.</p>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-header">
+                <p class="reading-label">THE ORACLE HAS SPOKEN</p>
+                <div class="power-score" id="power-score">0</div>
+                <p class="power-label">Morning Power</p>
+            </div>
+
+            <div class="oracle-card">
+                <div class="rank-badge" id="rank-badge">LOADING...</div>
+
+                <p class="oracle-reading" id="oracle-reading">
+                    The Oracle is contemplating your fate...
+                </p>
+
+                <div class="prescription-section">
+                    <p class="prescription-header">☀ Your Morning Prescription ☀</p>
+                    <div id="prescriptions"></div>
+                </div>
+
+                <div class="sova-section">
+                    <span class="sova-moon">☽</span>
+                    <h3>Your morning starts the night before.</h3>
+                    <p>The Oracle knows the secret: great mornings are built on great sleep. Meet Sova — the wind-down ritual for people who take rest seriously.</p>
+                    <a href="https://drinksova.com" target="_blank" class="sova-link">Discover Sova →</a>
+                </div>
+
+                <div class="book-section" id="book">
+                    <p>
+                        Want the <em>complete</em> morning wisdom?<br>
+                        20+ rituals. Zero fluff. All power.
+                    </p>
+                    <button class="btn-book" onclick="buyBook()">
+                        Get "Mornings Shouldn't Suck" — $12 →
+                    </button>
+                    <p style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--soft-brown); margin-top: 12px; opacity: 0.7;">
+                        Instant PDF download
+                    </p>
+                </div>
+
+                <div class="share-section">
+                    <p>CHALLENGE SOMEONE TO BEAT YOUR SCORE</p>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn" id="share-twitter" target="_blank">Share on X</a>
+                        <button class="share-btn" onclick="copyLink()">Copy Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Crafted with ☕ by <a href="mailto:chris@morningroutines.co">Chris Hardman</a> & <a href="https://drinksova.com" target="_blank">Sova</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                text: "When does your consciousness reluctantly return to this mortal realm?",
+                options: [
+                    { symbol: "☀️", text: "Before 6am — I greet the sun", points: 15 },
+                    { symbol: "🐓", text: "6-7am — Civilized hours", points: 12 },
+                    { symbol: "😴", text: "7-8am — Sleep is sacred", points: 8 },
+                    { symbol: "🦉", text: "After 8am — Time is a construct", points: 4 }
+                ]
+            },
+            {
+                text: "The snooze button. What is your relationship?",
+                options: [
+                    { symbol: "⚔️", text: "We are enemies. First alarm, I rise.", points: 15 },
+                    { symbol: "🤝", text: "A respectful truce. Once, maybe twice.", points: 10 },
+                    { symbol: "💕", text: "We're... intimate. 3-4 times.", points: 5 },
+                    { symbol: "💍", text: "Fully committed. Till noon do us part.", points: 2 }
+                ]
+            },
+            {
+                text: "Your first act upon waking?",
+                options: [
+                    { symbol: "💧", text: "Water. My vessel demands hydration.", points: 14 },
+                    { symbol: "🌅", text: "Seek the light. Eyes to the sun.", points: 13 },
+                    { symbol: "📱", text: "The glowing rectangle. I cannot resist.", points: 4 },
+                    { symbol: "🧟", text: "Stumble forth. Location: bathroom.", points: 6 }
+                ]
+            },
+            {
+                text: "Does your body move before the noon hour?",
+                options: [
+                    { symbol: "🏋️", text: "A full ritual of exertion.", points: 15 },
+                    { symbol: "🌿", text: "Gentle stretches. Mobility work.", points: 12 },
+                    { symbol: "🚶", text: "I walk. Sometimes with purpose.", points: 10 },
+                    { symbol: "🛋️", text: "My body remains horizontal.", points: 3 }
+                ]
+            },
+            {
+                text: "What sustenance greets your morning?",
+                options: [
+                    { symbol: "🍳", text: "Protein. Fuel for conquest.", points: 13 },
+                    { symbol: "🍌", text: "Something quick but nourishing.", points: 11 },
+                    { symbol: "☕", text: "Coffee IS the meal.", points: 5 },
+                    { symbol: "⏰", text: "I fast until the sun peaks.", points: 3 }
+                ]
+            },
+            {
+                text: "Do you tend to your mind each morning?",
+                options: [
+                    { symbol: "🧘", text: "Meditation. Journaling. The inner work.", points: 14 },
+                    { symbol: "📝", text: "I set intentions. Review my quests.", points: 12 },
+                    { symbol: "🎧", text: "Podcasts accompany my preparations.", points: 8 },
+                    { symbol: "🌀", text: "My mind does what it pleases. (Chaos)", points: 3 }
+                ]
+            },
+            {
+                text: "By mid-morning, what is your state?",
+                options: [
+                    { symbol: "⚡", text: "POWER. I am unstoppable.", points: 15 },
+                    { symbol: "😌", text: "Centered. Focused. Productive.", points: 12 },
+                    { symbol: "☕", text: "Seeking more caffeine...", points: 6 },
+                    { symbol: "💀", text: "Questioning all life choices.", points: 2 }
+                ]
+            },
+            {
+                text: "The truth now: How consistent is this ritual?",
+                options: [
+                    { symbol: "🏛️", text: "Daily. Sacred. Non-negotiable.", points: 15 },
+                    { symbol: "📅", text: "Most days. I am human.", points: 11 },
+                    { symbol: "🎲", text: "When the mood strikes.", points: 6 },
+                    { symbol: "🤷", text: "Ritual? I have no ritual.", points: 2 }
+                ]
+            }
+        ];
+
+        const ranks = [
+            {
+                min: 90,
+                title: "MORNING DEITY",
+                reading: "The Oracle bows before you. Your morning ritual would make ancient monks weep with envy. You've transcended the snooze button and emerged victorious. Continue your path, enlightened one—you're operating at the peak of human potential."
+            },
+            {
+                min: 75,
+                title: "MORNING WARRIOR",
+                reading: "You walk the path of power. Your mornings are a battle you're winning, though the Oracle sees room for ascension. A few adjustments—perhaps the light, perhaps the water—and you'll join the pantheon of morning gods."
+            },
+            {
+                min: 55,
+                title: "MORNING SEEKER",
+                reading: "The Oracle senses potential buried beneath... let's call it 'flexibility.' You have the foundation, seeker. Some mornings you conquer; others conquer you. The prescriptions below shall guide your ascent."
+            },
+            {
+                min: 35,
+                title: "MORNING SURVIVOR",
+                reading: "Ah. You exist in mornings, but barely. The Oracle sees much struggle, much negotiation with consciousness. Fear not—even the mightiest warriors once stumbled from bed in confusion. Your transformation begins today."
+            },
+            {
+                min: 0,
+                title: "MORNING CHAOS AGENT",
+                reading: "The Oracle is... concerned. Your mornings appear to be a beautiful disaster, a symphony of snooze buttons and survival instincts. BUT—and this is crucial—small changes create massive shifts. Your redemption arc starts now."
+            }
+        ];
+
+        const prescriptions = {
+            hydration: { title: "The Water Ritual", desc: "16oz upon waking. Your body has thirsted through the night. This alone can transform your energy." },
+            sunlight: { title: "Seek the Light", desc: "5-10 minutes of natural light within 30 minutes of waking. Your ancient biology demands it." },
+            movement: { title: "Move the Body", desc: "Five minutes. That's all. Stretches, jumping, walking. Wake the flesh before the mind." },
+            noPhone: { title: "Guard Your Morning Mind", desc: "30 minutes without the glowing rectangle. Your morning brain is sacred—don't let chaos infiltrate." },
+            protein: { title: "The Protein Path", desc: "20-30g at breakfast. Stabilizes your blood, focuses your mind. Eggs are ancient wisdom." },
+            mindset: { title: "Tend the Inner Garden", desc: "Two minutes of gratitude or visualization. It sounds soft. It works devastatingly well." },
+            consistency: { title: "Honor the Rhythm", desc: "Same wake time. Every day. Yes, weekends too. Your body craves this structure." },
+            snooze: { title: "Slay the Snooze Beast", desc: "Place your alarm across the room. End the toxic relationship. Fragmented sleep serves no one." }
+        };
+
+        let currentQuestion = 0;
+        let totalScore = 0;
+        let answers = [];
+
+        const sunProgress = ['DAWN', 'EARLY', 'RISING', 'MORNING', 'BRIGHT', 'GOLDEN', 'RADIANT', 'PEAK', 'ZENITH'];
+        const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+
+        function updateSun() {
+            const progress = currentQuestion / questions.length;
+            const sun = document.getElementById('pixel-sun');
+            const label = document.getElementById('sun-progress');
+
+            // Scale and glow increase with progress
+            const scale = 1 + (progress * 0.3);
+            sun.style.transform = `scale(${scale})`;
+
+            const idx = Math.min(Math.floor(progress * sunProgress.length), sunProgress.length - 1);
+            label.textContent = sunProgress[idx];
+        }
+
+        function startReading() {
+            document.getElementById('start-screen').classList.remove('active');
+            document.getElementById('question-screen').classList.add('active');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question-text').textContent = q.text;
+            document.getElementById('q-indicator').textContent = `QUESTION ${romanNumerals[currentQuestion]} OF VIII`;
+
+            updateSun();
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.setAttribute('data-symbol', opt.symbol);
+                btn.innerHTML = opt.text;
+                btn.onclick = () => selectOption(idx, opt.points, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(index, points, element) {
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            element.classList.add('selected');
+
+            answers.push(index);
+            totalScore += points;
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showEmailGate();
+                }
+            }, 500);
+        }
+
+        function showEmailGate() {
+            document.getElementById('question-screen').classList.remove('active');
+            document.getElementById('email-gate-screen').classList.add('active');
+            updateSun();
+        }
+
+        function showResults() {
+            document.getElementById('email-gate-screen').classList.remove('active');
+            document.getElementById('results-screen').classList.add('active');
+
+            updateSun();
+
+            const maxPossible = 116;
+            const normalizedScore = Math.round((totalScore / maxPossible) * 100);
+
+            // Animate score
+            let displayScore = 0;
+            const scoreEl = document.getElementById('power-score');
+            const interval = setInterval(() => {
+                displayScore += 2;
+                scoreEl.textContent = displayScore;
+                if (displayScore >= normalizedScore) {
+                    scoreEl.textContent = normalizedScore;
+                    clearInterval(interval);
+                }
+            }, 30);
+
+            const rank = ranks.find(r => normalizedScore >= r.min);
+            document.getElementById('rank-badge').textContent = rank.title;
+            document.getElementById('oracle-reading').textContent = rank.reading;
+
+            // Generate prescriptions
+            const rxContainer = document.getElementById('prescriptions');
+            const recs = getRecommendations();
+            rxContainer.innerHTML = recs.map((rx, i) => `
+                <div class="rx-item">
+                    <span class="rx-number">${romanNumerals[i]}.</span>
+                    <div class="rx-content">
+                        <h4>${rx.title}</h4>
+                        <p>${rx.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update share
+            const shareText = `The Morning Oracle has spoken: I scored ${normalizedScore}/100 (${rank.title}). What's YOUR morning power?`;
+            document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent('https://morningroutines.co')}`;
+        }
+
+        function getRecommendations() {
+            const recs = [];
+
+            if (answers[1] >= 2) recs.push(prescriptions.snooze);
+            if (answers[2] === 2) recs.push(prescriptions.noPhone);
+            if (answers[2] !== 0 && answers[2] !== 1) recs.push(prescriptions.hydration);
+            if (answers[2] !== 1) recs.push(prescriptions.sunlight);
+            if (answers[3] === 3) recs.push(prescriptions.movement);
+            if (answers[4] >= 2) recs.push(prescriptions.protein);
+            if (answers[5] >= 2) recs.push(prescriptions.mindset);
+            if (answers[7] >= 2) recs.push(prescriptions.consistency);
+
+            const unique = [...new Set(recs)];
+            const defaults = [prescriptions.hydration, prescriptions.sunlight, prescriptions.movement];
+            defaults.forEach(d => {
+                if (unique.length < 3 && !unique.includes(d)) unique.push(d);
+            });
+
+            return unique.slice(0, 3);
+        }
+
+        // Calculate score and rank before showing results (needed for email submission)
+        function calculateResults() {
+            const maxPossible = 116;
+            const normalizedScore = Math.round((totalScore / maxPossible) * 100);
+            const rank = ranks.find(r => normalizedScore >= r.min);
+            return { score: normalizedScore, rank: rank };
+        }
+
+        document.getElementById('gate-email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('gate-email-input').value;
+            const results = calculateResults();
+
+            // Submit to our serverless function (keeps API key hidden)
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    score: results.score.toString(),
+                    rank: results.rank.title
+                })
+            }).then(response => {
+                // Show results regardless of API success
+                showResults();
+            }).catch((error) => {
+                console.error('Subscribe error:', error);
+                // Still show results even if API fails
+                showResults();
+            });
+        });
+
+        function copyLink() {
+            navigator.clipboard.writeText('https://morningroutines.co');
+            event.target.textContent = 'Copied!';
+            setTimeout(() => event.target.textContent = 'Copy Link', 2000);
+        }
+
+        async function buyBook() {
+            try {
+                const response = await fetch('/api/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                const data = await response.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                }
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Something went wrong. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>

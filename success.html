@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Your Book | Mornings Shouldn't Suck</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream: #FDF6E3;
+            --warm-white: #FFFEF9;
+            --sepia: #D4A574;
+            --burnt-orange: #C7522A;
+            --deep-brown: #3D2914;
+            --soft-brown: #6B4423;
+            --golden: #DAA520;
+            --peach: #FFDAB9;
+            --sage: #8B9A6D;
+        }
+
+        body {
+            font-family: 'Instrument Serif', Georgia, serif;
+            background: var(--cream);
+            color: var(--deep-brown);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--warm-white);
+            padding: 50px 40px;
+            border: 3px solid var(--deep-brown);
+            border-radius: 2px 8px 4px 6px;
+            box-shadow: 6px 6px 0 var(--sepia);
+            text-align: center;
+            position: relative;
+        }
+
+        .card::before {
+            content: '✦';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cream);
+            padding: 0 15px;
+            font-size: 1.2rem;
+            color: var(--burnt-orange);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: var(--sage);
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: var(--soft-brown);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--burnt-orange);
+            color: var(--cream);
+            padding: 18px 40px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0 var(--sepia);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .content.hidden {
+            display: none;
+        }
+
+        .error-message {
+            display: none;
+            background: #FEE2E2;
+            color: #991B1B;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .note {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--soft-brown);
+            margin-top: 25px;
+            opacity: 0.7;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--soft-brown);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--burnt-orange);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--sepia);
+            border-top-color: var(--burnt-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Loading State -->
+            <div class="loading" id="loading">
+                <span class="success-icon">📖</span>
+                <h1>Verifying your purchase...</h1>
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Success State -->
+            <div class="content hidden" id="success-content">
+                <span class="success-icon">🎉</span>
+                <h1>You're In!</h1>
+                <p class="message">
+                    Your purchase was successful. Click below to download your copy of <em>Mornings Shouldn't Suck</em>.
+                </p>
+                <a href="#" class="btn" id="download-btn">Download PDF →</a>
+                <p class="note">
+                    Bookmark this page — you can return to download again anytime.
+                </p>
+            </div>
+
+            <!-- Error State -->
+            <div class="content hidden" id="error-content">
+                <span class="success-icon">😕</span>
+                <h1>Something went wrong</h1>
+                <p class="error-message active" id="error-message">
+                    We couldn't verify your purchase. Please contact chris@morningroutines.co for help.
+                </p>
+                <a href="/" class="btn">Back to Home</a>
+            </div>
+
+            <a href="/" class="back-link">← Back to The Morning Oracle</a>
+        </div>
+    </div>
+
+    <script>
+        async function verifyPurchase() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            const loadingEl = document.getElementById('loading');
+            const successEl = document.getElementById('success-content');
+            const errorEl = document.getElementById('error-content');
+            const downloadBtn = document.getElementById('download-btn');
+
+            if (!sessionId) {
+                loadingEl.classList.remove('active');
+                errorEl.classList.remove('hidden');
+                document.getElementById('error-message').textContent = 'No purchase session found. If you just made a purchase, please check your email or contact chris@morningroutines.co';
+                return;
+            }
+
+            loadingEl.classList.add('active');
+
+            try {
+                const response = await fetch('/api/verify-purchase', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionId }),
+                });
+
+                const data = await response.json();
+
+                loadingEl.classList.remove('active');
+
+                if (data.success) {
+                    successEl.classList.remove('hidden');
+                    downloadBtn.href = `/api/download?token=${sessionId}`;
+                } else {
+                    errorEl.classList.remove('hidden');
+                    document.getElementById('error-message').textContent = data.error || 'Payment verification failed. Please contact chris@morningroutines.co';
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                loadingEl.classList.remove('active');
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        // Start verification on page load
+        verifyPurchase();
+    </script>
+</body>
+</html>

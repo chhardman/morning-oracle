@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            background: #FDF6E3;
+            font-family: 'Instrument Serif', Georgia, serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Grain texture */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+        }
+
+        .corner { position: absolute; font-size: 80px; opacity: 0.1; color: #D4A574; }
+        .corner.tl { top: 30px; left: 40px; }
+        .corner.br { bottom: 30px; right: 40px; }
+
+        .sun {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-style: italic;
+            color: #3D2914;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 22px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #6B4423;
+            margin-bottom: 40px;
+        }
+
+        .cta {
+            background: #C7522A;
+            color: #FDF6E3;
+            padding: 20px 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+        }
+
+        .url {
+            position: absolute;
+            bottom: 35px;
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            color: #6B4423;
+            letter-spacing: 2px;
+        }
+
+        .sova {
+            position: absolute;
+            top: 35px;
+            right: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: #6B4423;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="corner tl">☽</div>
+    <div class="corner br">✧</div>
+    <div class="sova">by Chris Hardman & Sova</div>
+
+    <div class="sun">🌄</div>
+    <h1>The Morning Oracle</h1>
+    <p class="subtitle">What's Your Morning Power Score?</p>
+    <div class="cta">Take the Quiz →</div>
+
+    <p class="url">morningroutines.co</p>
+</body>
+</html>
