@@ -832,6 +832,7 @@
                 </p>
 
                 <form id="gate-email-form" style="max-width: 320px; margin: 0 auto;">
+                    <input type="text" class="email-input" placeholder="Your first name" required id="gate-name-input" style="width: 100%; margin-bottom: 12px; text-align: center;">
                     <input type="email" class="email-input" placeholder="your@email.com" required id="gate-email-input" style="width: 100%; margin-bottom: 12px; text-align: center;">
                     <button type="submit" class="btn-oracle" style="margin-bottom: 15px;">
                         Reveal My Score →
@@ -1154,6 +1155,7 @@
 
         document.getElementById('gate-email-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            const firstName = document.getElementById('gate-name-input').value;
             const email = document.getElementById('gate-email-input').value;
             const results = calculateResults();
 
@@ -1164,6 +1166,7 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    firstName: firstName,
                     email: email,
                     score: results.score.toString(),
                     rank: results.rank.title
