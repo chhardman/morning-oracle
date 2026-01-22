@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 firstName: firstName || '',
                 status: 'subscribed',
                 statusDate: new Date().toISOString(),
-                tags: ['morning-oracle-quiz'],
+                tags: ['morning-oracle-quiz', 'MSS'],
                 customProperties: {
                     morningPowerScore: score || '',
                     morningRank: rank || ''
