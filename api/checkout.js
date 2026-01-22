@@ -23,7 +23,7 @@ export default async function handler(req, res) {
                         currency: 'usd',
                         product_data: {
                             name: 'Mornings Shouldn\'t Suck',
-                            description: 'The complete guide to building a powerful morning routine. 20+ science-backed habits.',
+                            description: 'Your guide to the ultimate morning. 22 chapters on health, mindset & discipline.',
                         },
                         unit_amount: 1200, // $12.00 in cents
                     },
