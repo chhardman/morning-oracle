@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { getDownloadUrl } from '@vercel/blob';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -51,11 +52,17 @@ export default async function handler(req, res) {
             `);
         }
 
-        // Payment verified - redirect to the PDF
+        // Payment verified - generate a signed URL that expires
         const pdfUrl = process.env.BOOK_PDF_URL;
 
         if (pdfUrl) {
-            res.redirect(302, pdfUrl);
+            // Generate a signed URL that expires in 30 days
+            const signedUrl = await getDownloadUrl(pdfUrl, {
+                expiresIn: 2592000, // 30 days
+                downloadFilename: 'Mornings-Shouldnt-Suck.pdf',
+            });
+
+            res.redirect(302, signedUrl);
         } else {
             res.status(500).json({
                 error: 'PDF not configured. Set BOOK_PDF_URL environment variable.',
