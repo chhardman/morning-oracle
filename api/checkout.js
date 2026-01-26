@@ -13,27 +13,44 @@ export default async function handler(req, res) {
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     const origin = req.headers.origin || 'https://morningroutines.co';
+    const addTemplates = req.body?.addTemplates === true;
+
+    const lineItems = [
+        {
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: 'Mornings Shouldn\'t Suck',
+                    description: 'Your guide to the ultimate morning. 22 chapters on health, mindset & discipline.',
+                },
+                unit_amount: 1200, // $12.00 in cents
+            },
+            quantity: 1,
+        },
+    ];
+
+    if (addTemplates) {
+        lineItems.push({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: 'MSSS Templates + Trackers Pack',
+                },
+                unit_amount: 900, // $9.00 in cents
+            },
+            quantity: 1,
+        });
+    }
 
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            line_items: [
-                {
-                    price_data: {
-                        currency: 'usd',
-                        product_data: {
-                            name: 'Mornings Shouldn\'t Suck',
-                            description: 'Your guide to the ultimate morning. 22 chapters on health, mindset & discipline.',
-                        },
-                        unit_amount: 1200, // $12.00 in cents
-                    },
-                    quantity: 1,
-                },
-            ],
+            line_items: lineItems,
             mode: 'payment',
             success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/#book`,
             customer_creation: 'always',
+            metadata: addTemplates ? { addTemplates: 'true' } : {},
         });
 
         res.status(200).json({ url: session.url });

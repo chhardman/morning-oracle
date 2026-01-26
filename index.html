@@ -587,6 +587,20 @@
             line-height: 1.6;
         }
 
+        .addon-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--soft-brown);
+            margin-bottom: 16px;
+        }
+
+        .addon-option input {
+            accent-color: var(--burnt-orange);
+        }
+
         .btn-book {
             display: inline-block;
             background: var(--burnt-orange);
@@ -883,6 +897,10 @@
                         Want the <em>complete</em> morning wisdom?<br>
                         22 chapters. 3 pillars. Your ultimate morning.
                     </p>
+                    <label class="addon-option">
+                        <input type="checkbox" id="templates-addon">
+                        Add Templates + Trackers Pack (+$9)
+                    </label>
                     <button class="btn-book" onclick="buyBook()">
                         Get "Mornings Shouldn't Suck" — $12 →
                     </button>
@@ -1197,10 +1215,12 @@
         }
 
         async function buyBook() {
+            const addTemplates = document.getElementById('templates-addon')?.checked || false;
             try {
                 const response = await fetch('/api/checkout', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ addTemplates }),
                 });
                 const data = await response.json();
                 if (data.url) {
