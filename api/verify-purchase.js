@@ -19,6 +19,7 @@ export default async function handler(req, res) {
 
         // Verify payment was successful
         if (session.payment_status === 'paid') {
+            const addTemplatesPurchased = session.metadata?.addTemplates === 'true';
             // Set a secure cookie that lasts 30 days
             // The cookie stores the session ID so we can verify it later
             res.setHeader('Set-Cookie', [
@@ -28,6 +29,7 @@ export default async function handler(req, res) {
             return res.status(200).json({
                 success: true,
                 customerEmail: session.customer_details?.email || '',
+                addTemplatesPurchased,
             });
         } else {
             return res.status(400).json({

@@ -207,6 +207,7 @@
                     Your purchase was successful. Click below to download your copy of <em>Mornings Shouldn't Suck</em>.
                 </p>
                 <a href="#" class="btn" id="download-btn">Download PDF →</a>
+                <a href="#" class="btn" id="download-templates-btn" style="display: none; margin-top: 12px;">Download Templates + Trackers →</a>
                 <p class="note">
                     You can return to download again anytime (same browser, 30 days).
                 </p>
@@ -235,6 +236,7 @@
             const successEl = document.getElementById('success-content');
             const errorEl = document.getElementById('error-content');
             const downloadBtn = document.getElementById('download-btn');
+            const downloadTemplatesBtn = document.getElementById('download-templates-btn');
 
             if (!sessionId) {
                 loadingEl.classList.remove('active');
@@ -260,6 +262,10 @@
                     successEl.classList.remove('hidden');
                     // Cookie is now set, so download link just goes to /api/download
                     downloadBtn.href = '/api/download';
+                    if (data.addTemplatesPurchased) {
+                        downloadTemplatesBtn.href = '/api/download-templates';
+                        downloadTemplatesBtn.style.display = 'inline-block';
+                    }
                 } else {
                     errorEl.classList.remove('hidden');
                     document.getElementById('error-message').textContent = data.error || 'Payment verification failed. Please contact chris@morningroutines.co';
