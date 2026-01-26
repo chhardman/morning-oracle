@@ -573,51 +573,231 @@
             font-family: 'Space Mono', monospace;
         }
 
-        /* Book CTA */
+        /* Book CTA - Enhanced */
         .book-section {
             text-align: center;
-            padding: 30px 0;
-            margin-top: 20px;
+            padding: 35px 25px;
+            margin: 30px -30px;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FDF6E3 100%);
+            border: 3px solid var(--burnt-orange);
+            position: relative;
         }
 
-        .book-section p {
+        .book-section::before {
+            content: '🔥 QUIZ-TAKER SPECIAL 🔥';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--burnt-orange);
+            color: var(--cream);
+            padding: 6px 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .book-header {
+            font-size: 1.4rem;
             font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 8px;
+            color: var(--deep-brown);
         }
 
-        .addon-option {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+        .book-subhead {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--soft-brown);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            background: var(--deep-brown);
+            color: var(--golden);
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .price-box {
+            margin: 20px 0;
+        }
+
+        .price-original {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            color: var(--soft-brown);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .price-current {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--burnt-orange);
+            display: block;
+            margin: 5px 0;
+        }
+
+        .price-savings {
             font-family: 'Space Mono', monospace;
             font-size: 0.75rem;
-            color: var(--soft-brown);
-            margin-bottom: 16px;
+            color: var(--sage);
+            letter-spacing: 1px;
         }
 
-        .addon-option input {
+        .bundle-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 25px 0;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bundle-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 18px;
+            border: 2px solid var(--sepia);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            background: var(--warm-white);
+        }
+
+        .bundle-option:hover {
+            border-color: var(--burnt-orange);
+            transform: translateX(3px);
+        }
+
+        .bundle-option.selected {
+            border-color: var(--burnt-orange);
+            background: var(--peach);
+        }
+
+        .bundle-option input[type="radio"] {
             accent-color: var(--burnt-orange);
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .bundle-details {
+            flex: 1;
+        }
+
+        .bundle-name {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .bundle-desc {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--soft-brown);
+        }
+
+        .bundle-price {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--burnt-orange);
+            font-weight: bold;
+        }
+
+        .bundle-option.recommended {
+            position: relative;
+            border-color: var(--burnt-orange);
+        }
+
+        .bundle-option.recommended::after {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--sage);
+            color: var(--cream);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            padding: 3px 8px;
+            letter-spacing: 1px;
         }
 
         .btn-book {
-            display: inline-block;
+            display: block;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
             background: var(--burnt-orange);
             color: var(--cream);
-            padding: 16px 40px;
+            padding: 18px 40px;
             font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-decoration: none;
             transition: all 0.2s ease;
-            border: 2px solid var(--burnt-orange);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-book::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .btn-book:hover {
-            background: transparent;
-            color: var(--burnt-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(199, 82, 42, 0.4);
+        }
+
+        .urgency-timer {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--soft-brown);
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .timer-icon {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .guarantee {
+            font-size: 0.8rem;
+            color: var(--soft-brown);
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Hide old addon option */
+        .addon-option {
+            display: none;
         }
 
         /* Sova Section */
@@ -783,6 +963,34 @@
             .corner-doodle {
                 display: none;
             }
+
+            .book-section {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding: 30px 15px;
+            }
+
+            .book-section::before {
+                font-size: 0.6rem;
+                padding: 5px 12px;
+            }
+
+            .bundle-options {
+                max-width: 100%;
+            }
+
+            .bundle-option {
+                padding: 12px 14px;
+            }
+
+            .price-current {
+                font-size: 2rem;
+            }
+
+            .sova-section {
+                margin-left: -20px;
+                margin-right: -20px;
+            }
         }
     </style>
 </head>
@@ -885,28 +1093,58 @@
                     <div id="prescriptions"></div>
                 </div>
 
+                <!-- Book Offer - Primary CTA -->
+                <div class="book-section" id="book">
+                    <h3 class="book-header">Transform Your Mornings Forever</h3>
+                    <p class="book-subhead">22 chapters • 3 pillars • Instant PDF download</p>
+
+                    <div class="score-message" id="score-message">
+                        <!-- Populated by JS based on score -->
+                    </div>
+
+                    <div class="price-box">
+                        <span class="price-original">$27</span>
+                        <span class="price-current">$12</span>
+                        <span class="price-savings">YOU SAVE 56% — QUIZ TAKER PRICE</span>
+                    </div>
+
+                    <div class="bundle-options">
+                        <label class="bundle-option selected" onclick="selectBundle('book')">
+                            <input type="radio" name="bundle" value="book" checked>
+                            <div class="bundle-details">
+                                <div class="bundle-name">📖 The Book</div>
+                                <div class="bundle-desc">Complete morning mastery guide</div>
+                            </div>
+                            <div class="bundle-price">$12</div>
+                        </label>
+                        <label class="bundle-option recommended" onclick="selectBundle('complete')">
+                            <input type="radio" name="bundle" value="complete">
+                            <div class="bundle-details">
+                                <div class="bundle-name">📖 + 📋 Complete Bundle</div>
+                                <div class="bundle-desc">Book + Templates + 7-Day Tracker + Checklist</div>
+                            </div>
+                            <div class="bundle-price">$18</div>
+                        </label>
+                    </div>
+
+                    <button class="btn-book" onclick="buyBook()">
+                        Get Instant Access →
+                    </button>
+
+                    <div class="urgency-timer">
+                        <span class="timer-icon">⏰</span>
+                        <span>Quiz price expires in <strong id="countdown">14:59</strong></span>
+                    </div>
+
+                    <p class="guarantee">✓ Instant download • ✓ Works on all devices • ✓ 30-day money-back guarantee</p>
+                </div>
+
+                <!-- Sova Section - Secondary -->
                 <div class="sova-section">
                     <span class="sova-moon">☽</span>
                     <h3>Your morning starts the night before.</h3>
                     <p>The Oracle knows the secret: great mornings are built on great sleep. Meet Sova — the wind-down ritual for people who take rest seriously.</p>
                     <a href="https://drinksova.com" target="_blank" class="sova-link">Discover Sova →</a>
-                </div>
-
-                <div class="book-section" id="book">
-                    <p>
-                        Want the <em>complete</em> morning wisdom?<br>
-                        22 chapters. 3 pillars. Your ultimate morning.
-                    </p>
-                    <label class="addon-option">
-                        <input type="checkbox" id="templates-addon">
-                        Add Templates + Trackers Pack (+$9) — printable planner + 7-day tracker + night-before checklist
-                    </label>
-                    <button class="btn-book" onclick="buyBook()">
-                        Get "Mornings Shouldn't Suck" — $12 →
-                    </button>
-                    <p style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--soft-brown); margin-top: 12px; opacity: 0.7;">
-                        Instant PDF download
-                    </p>
                 </div>
 
                 <div class="share-section">
@@ -1149,6 +1387,10 @@
             // Update share
             const shareText = `The Morning Oracle has spoken: I scored ${normalizedScore}/100 (${rank.title}). What's YOUR morning power?`;
             document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent('https://morningroutines.co')}`;
+
+            // Set personalized offer message and start timer
+            setScoreMessage(normalizedScore, rank.title);
+            startCountdown();
         }
 
         function getRecommendations() {
@@ -1214,8 +1456,20 @@
             setTimeout(() => event.target.textContent = 'Copy Link', 2000);
         }
 
+        // Bundle selection
+        let selectedBundle = 'book';
+
+        function selectBundle(bundle) {
+            selectedBundle = bundle;
+            document.querySelectorAll('.bundle-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            event.currentTarget.querySelector('input').checked = true;
+        }
+
         async function buyBook() {
-            const addTemplates = document.getElementById('templates-addon')?.checked || false;
+            const addTemplates = selectedBundle === 'complete';
             try {
                 const response = await fetch('/api/checkout', {
                     method: 'POST',
@@ -1230,6 +1484,44 @@
                 console.error('Checkout error:', error);
                 alert('Something went wrong. Please try again.');
             }
+        }
+
+        // Countdown timer
+        function startCountdown() {
+            let timeLeft = 15 * 60; // 15 minutes in seconds
+            const countdownEl = document.getElementById('countdown');
+
+            const timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    countdownEl.textContent = "EXPIRED";
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Score-based messaging
+        function setScoreMessage(score, rankTitle) {
+            const messageEl = document.getElementById('score-message');
+            let message = '';
+
+            if (score < 35) {
+                message = `As a "${rankTitle}", this book was literally written for you. Your transformation starts here.`;
+            } else if (score < 55) {
+                message = `You're a "${rankTitle}" — so close to greatness. This book bridges the gap.`;
+            } else if (score < 75) {
+                message = `Nice work, ${rankTitle}! Level up with the strategies the top 10% use.`;
+            } else if (score < 90) {
+                message = `${rankTitle} status! Fine-tune your routine with these advanced techniques.`;
+            } else {
+                message = `A ${rankTitle}! You already rock mornings — but mastery has no ceiling.`;
+            }
+
+            messageEl.textContent = message;
         }
     </script>
 </body>
